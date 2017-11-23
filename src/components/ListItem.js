@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-
-const ListItem = () => (
+const ListItem = (props) => (
   <div>
-    <p>This is ListItem</p>
+    <p onClick={props.onClick}>{props.word}</p>
   </div>
 );
 

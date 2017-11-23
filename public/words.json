@@ -1,3 +1,5 @@
 {
-  "words": ["test", "ord2"]
+  "substantiv": ["häst", "boll"],
+  "adjektiv": ["varm", "kall"],
+  "verb": ["Springa", "Leka"]
 }
