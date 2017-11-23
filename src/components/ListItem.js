@@ -1,9 +1,9 @@
 import React from 'react';
 
 const ListItem = (props) => (
-  <div>
-    <p onClick={props.onClick}>{props.word}</p>
-  </div>
+
+    <td onClick={props.onClick}>{props.word}</td>
+
 );
 
 export default ListItem;

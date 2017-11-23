@@ -5,7 +5,6 @@ import './styles/styles.scss';
 import List from './components/List';
 
 
-
 const App = () => (
   <div>
     <List />
