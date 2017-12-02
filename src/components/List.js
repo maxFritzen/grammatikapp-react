@@ -13,11 +13,13 @@ export default class List extends React.Component {
         adjektiv: [],
         verb: [],
         selectedWord: '',
+        showSelectedWord: false,
         correctWord: {
           word:'häst',
           type: 'substantiv'
         },
         result: false,
+        showResult: false,
         isLoading: false,
         error: null
       };
@@ -44,8 +46,10 @@ export default class List extends React.Component {
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
-  handleRandomWord = () => {
-    console.log('handleRandomWord');
+  handleNewWord = () => {
+    console.log('handleNewWord');
+    this.setState( { showResult: false });
+    this.setState( { showSelectedWord: false });
     const arrayOfAllWords = [
       ...this.state.substantiv,
       ...this.state.adjektiv,
@@ -73,22 +77,10 @@ export default class List extends React.Component {
   handleClick = (word) => {
     console.log('clicked', word);
     this.setState({ selectedWord: word });
+    this.setState( { showSelectedWord: true });
   }
 
-  // handleCorrecting = () => {
-  //   const correctWord = this.state.correctWord;
-  //   const selectedWord = this.state.selectedWord
-  //
-  //   if (correctWord === selectedWord) {
-  //     this.setState( { result: true });
-  //   } else {
-  //     this.setState( { result: false });
-  //   }
-  //
-  // }
   handleCorrecting = () => {
-   // är correctWord av typen som användaren valde att klicka på(selectedWord)?
-   //if so, correct! if not, wrong!
    if ( this.state.selectedWord === this.state.correctWord.type ) {
      this.setState( { result: true });
      console.log('rätt!');
@@ -96,6 +88,7 @@ export default class List extends React.Component {
      this.setState( { result: false });
      console.log('fel!');
    }
+   this.setState( { showResult: true });
   }
 
   render() {
@@ -106,34 +99,28 @@ export default class List extends React.Component {
      if (this.state.isLoading) {
        return <p>Loading ...</p>;
      }
-     const res = 'resultat: ' + (this.state.result ? 'Rätt!' : 'Fel');
-      return (
+     const res = (this.state.result ? 'Rätt!' : 'Fel');
 
+      return (
         <div>
           <h1>List item</h1>
           <div>
             <table>
               <tbody>
               <tr>
-
-              <ListItem word={"substantiv"} onClick={() => this.handleClick("substantiv")}/>
-              <ListItem word={"verb"} onClick={() => this.handleClick("verb")}/>
+                <ListItem word={"substantiv"} onClick={() => this.handleClick("substantiv")}/>
+                <ListItem word={"verb"} onClick={() => this.handleClick("verb")}/>
+                <ListItem word={"adjektiv"} onClick={() => this.handleClick("adjektiv")}/>
               </tr>
               </tbody>
             </table>
-            <button onClick={this.handleRandomWord}>Nytt ord</button>
+            <button onClick={this.handleNewWord}>Nytt ord</button>
             <button onClick={this.handleCorrecting}>Rätta</button>
-            <p>Clicked word: {this.state.selectedWord} </p>
+            <p>Selected word: {this.state.showSelectedWord && this.state.selectedWord} </p>
             <p>Correct word: {this.state.correctWord.word}</p>
             <p>Correct type: {this.state.correctWord.type}</p>
-            <h2>{res}</h2>
-            <p>Substantiv: {this.state.substantiv.map((word => {
-              return <li key={word}>{word}</li>
-              }))
-            }</p>
-
+            <h2>Resultat: {this.state.showResult && res} </h2>
           </div>
-
         </div>
       );
     }
