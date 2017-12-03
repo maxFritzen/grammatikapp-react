@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-import List from './components/List';
+import AppRouter from './routers/AppRouter';
 
 
 const App = () => (
   <div>
-    <List />
+    <AppRouter />
   </div>
 );
 
