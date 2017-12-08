@@ -99,26 +99,40 @@ export default class PracticePage extends React.Component {
     if (this.state.isLoading) {
       return <LoadingPage />;
     }
-    const res = (this.state.result ? 'Rätt!' : 'Fel');
+    const res = (this.state.result ? 'Rätt!' : 'Fel, försök igen');
     return (
       <div>
         <Header />
-        <div className="content-container">
-          <h3>Vilken typ av ord är ordet: {this.state.correctWord.word}</h3>
+          <div className="page-header">
+            <h1 className="page-header__title">{this.state.correctWord.word}</h1>
+          </div>
+
           <List
             handleClick={this.handleClick}
             />
 
-          <div>
-            <button onClick={this.handleNewWord}>Nytt ord</button>
-            <button onClick={this.handleCorrecting}>Rätta</button>
-            <p>Selected type: {this.state.showSelectedWord && this.state.selectedWord} </p>
 
-            <p>Correct type: {this.state.correctWord.type}</p>
-            <h2>Resultat: {this.state.showResult && res} </h2>
+            <div className="actions">
+              <button
+                className="button"
+                onClick={this.handleNewWord}
+                >
+                  Nytt ord
+                </button>
+
+              <button
+                className="button"
+                onClick={this.handleCorrecting}
+                >
+                  Rätta
+                </button>
+              </div>
+
+              <div className="result">
+                <p className="result__title">{this.state.showResult && res} </p>
+              </div>
           </div>
-        </div>
-      </div>
+
     );
   }
 }

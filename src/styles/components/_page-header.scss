@@ -1,0 +1,20 @@
+.page-header {
+  display: flex;
+  justify-content: center;
+}
+
+.page-header__link {
+  text-decoration: none;
+  color:$color5;
+  font-size: $l-size;
+  padding-right: $m-size;
+}
+
+.page-header__title {
+  color: $color5;
+  text-transform: uppercase;
+}
+
+.is-active {
+  color:white;
+}

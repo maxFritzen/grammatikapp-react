@@ -1,12 +1,17 @@
 .list {
-
+  display: flex;
+  justify-content: center;
 }
 
 .list__item {
-  padding: $m-size;
-
+  background: $color3;
+  border-radius: 1rem;
+  font-size: $font-size-large;
+  margin-right: 1rem;
+  padding: $l-size;
 }
 
 .list__item--selected {
-  background: green;
+  background: $color2;
+
 }

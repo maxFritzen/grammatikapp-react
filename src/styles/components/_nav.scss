@@ -1,21 +1,15 @@
-.header {
+.nav {
+  display: flex;
   background: $color5;
 }
 
-.header__link {
+.nav__link {
   text-decoration: none;
   color:$color1;
   font-size: $l-size;
   padding-right: $m-size;
 }
 
-.header__title {
-  color: white;
-  text-decoration: none;
-  h1 {
-    margin: 0;
-  }
-}
 
 .is-active {
   color:white;

@@ -19,7 +19,7 @@ export default class StartPage extends React.Component {
     return (
       <div>
         <Header />
-        <p>Information kring vad man kan göra typ. </p>
+        <p>Information kring vad man kan göra typ. Förklara övning och test.</p>
       </div>
     );
   }
