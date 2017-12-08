@@ -1,6 +1,7 @@
 import React from 'react';
-import List from './List';
 import Header from './Header';
+import List from './List';
+import LoadingPage from './LoadingPage';
 
 const path = require('path');
 const API = path.join(__dirname, 'words.json');
@@ -100,19 +101,21 @@ export default class TestPage extends React.Component {
       return <p>{error.message}</p>;
     }
     if (this.state.isLoading) {
-      return <p>Loading ...</p>;
+      return <LoadingPage />;
     }
+    const numberOfQuestions = 5;
+    const disabled = this.state.selectedWord.length >= numberOfQuestions ? false : true;
     return (
       <div>
         <Header />
         <h1>Test</h1>
-        <button onClick={this.handleNewWord}>Nytt ord</button>
-        <button onClick={this.handleCorrecting}>Rätta!</button>
-        <p>Selected type: {this.state.showSelectedWord && this.state.selectedWord} </p>
-        <p>word:{this.state.correctWords.words +  ", "}</p>
-        <p>type:{this.state.correctWords.type +  ", "}</p>
+        <button onClick={this.handleNewWord} disabled={!disabled}>Nytt ord</button>
+        <button onClick={this.handleCorrecting} disabled={disabled}>Rätta!</button>
+        <p>Selected type: {this.state.showSelectedWord && this.state.selectedWord + " "} </p>
+        <p>word:{this.state.correctWords.words + " "}</p>
+        <p>type:{this.state.correctWords.type +  " "}</p>
         <p>{this.state.question.map((number, index) =>
-             <li key={index}>Fråga {index} : {number}</li>
+             <li key={index}>Fråga {index + 1} : {number}</li>
         )}</p>
         <List
           handleClick={this.handleClick}

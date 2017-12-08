@@ -1,6 +1,8 @@
 import React from 'react';
-import List from './List';
 import Header from './Header';
+import List from './List';
+import LoadingPage from './LoadingPage';
+
 
 const path = require('path');
 const API = path.join(__dirname, 'words.json');
@@ -95,25 +97,26 @@ export default class PracticePage extends React.Component {
       return <p>{error.message}</p>;
     }
     if (this.state.isLoading) {
-      return <p>Loading ...</p>;
+      return <LoadingPage />;
     }
     const res = (this.state.result ? 'Rätt!' : 'Fel');
     return (
       <div>
         <Header />
-        <h1>Practice</h1>
+        <div className="content-container">
+          <h3>Vilken typ av ord är ordet: {this.state.correctWord.word}</h3>
+          <List
+            handleClick={this.handleClick}
+            />
 
-        <List
-          handleClick={this.handleClick}
-          />
+          <div>
+            <button onClick={this.handleNewWord}>Nytt ord</button>
+            <button onClick={this.handleCorrecting}>Rätta</button>
+            <p>Selected type: {this.state.showSelectedWord && this.state.selectedWord} </p>
 
-        <div>
-          <button onClick={this.handleNewWord}>Nytt ord</button>
-          <button onClick={this.handleCorrecting}>Rätta</button>
-          <p>Selected type: {this.state.showSelectedWord && this.state.selectedWord} </p>
-          <p>Correct word: {this.state.correctWord.word}</p>
-          <p>Correct type: {this.state.correctWord.type}</p>
-          <h2>Resultat: {this.state.showResult && res} </h2>
+            <p>Correct type: {this.state.correctWord.type}</p>
+            <h2>Resultat: {this.state.showResult && res} </h2>
+          </div>
         </div>
       </div>
     );
